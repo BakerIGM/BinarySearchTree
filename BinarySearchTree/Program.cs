@@ -10,60 +10,76 @@ namespace BinarySearchTree
         static void Main(string[] args)
         {
             BinSearchTree tree = new BinSearchTree();
-
-            //  Comment out for BST part 3
-            tree.HardCode();
+            string line;
+            int inputNumber, number;
 
             do
             {
-                Console.Write("What would you like to do? (add, display, quit) ");
+                Console.Write(
+                    "1 - Build Hard coded tree\n" +
+                    "2 - Load a tree from a file\n" +
+                    "3 - Print out the tree\n" +
+                    "4 - Save the tree to a file\n" +
+                    "5 - Add a new number to the tree\n" +
+                    "6 - Count the how many numbers are in the tree\n" +
+                    "7 - Exit\n" +
+                    "Enter the number (1-7) for what you would like to do? ");
 
-                string line = Console.ReadLine();
-                line = line.ToLower();
+                line = Console.ReadLine();
 
-                if (line.Equals("add"))
+                if(int.TryParse(line, out inputNumber))
                 {
-                    /*      BST part 3
-                    Console.Write("Number to add: ");
-
-                    string input = Console.ReadLine();
-
-                    tree.Add(int.Parse(input));
-                    */
-                }
-                else if (line.Equals("display"))
-                {
-                    /*      BST part 2
-                    Console.Write("Which traversal method? (in, pre, post)");
-
-                    switch(Console.ReadLine().ToLower())
+                    switch(inputNumber)
                     {
-                        case "in":
-                            tree.InOrderTraversal();
+                        case 1:
+                            tree.HardCode();
+                            Console.WriteLine("Tree built");
                             break;
-                        case "pre":
-                            tree.PreOrderTraversal();
+                        case 2:
+                            Console.Write("What file would you like to load? ");
+                            tree.LoadFromFile(Console.ReadLine());
+                            Console.WriteLine("Tree built");
                             break;
-                        case "post":
-                            tree.PosstOrderTraversal();
+                        case 3:
+                            tree.Print();
+                            break;
+                        case 4:
+                            Console.Write("What file you would like to save the tree to? ");
+                            tree.SaveToFile(Console.ReadLine());
+                            Console.WriteLine("Tree saved");
+                            break;
+                        case 5:
+                            Console.Write("What whole number would you like to add? ");
+                            line = Console.ReadLine();
+
+                            if(int.TryParse(line, out number))
+                            {
+                                tree.Add(number);
+                                Console.WriteLine("Number added to tree");
+                            }
+                            else
+                            {
+                                Console.WriteLine("{} is not a valid whole number", line);
+                            }
+                            break;
+                        case 6:
+                            Console.WriteLine("There are {0} numbers in the tree", tree.Count());
+                            break;
+                        case 7:
+                            Console.WriteLine("Good bye");
                             break;
                         default:
-                            Console.WriteLine("Invaild Input");
+                            Console.WriteLine("Please enter a number between 1-7");
                             break;
                     }
-                    */
-                }
-                else if (line.Equals("quit"))
-                {
-                    break;
                 }
                 else
                 {
-                    Console.WriteLine("Invaild Input");
+                    Console.WriteLine("Please enter a number between 1-7");
                 }
-            } while (true);
 
-            Console.WriteLine("Good bye");
+                Console.WriteLine("\n\n\n\n");
+            } while (inputNumber != 7);
         }
     }
 }
